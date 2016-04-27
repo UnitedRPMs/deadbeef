@@ -10,11 +10,12 @@ Name:           deadbeef
 Version:        0.7.1
 Release:        2%{?gver}%{dist}
 Summary:        GTK2 audio player
-Group:          Productivity/Multimedia/Sound/Players
-License:        GPL-2.0+
+Group:		Applications/Multimedia
+License:        GPLv2
 Url:            http://deadbeef.sourceforge.net/
 Source0:	%{name}-%{version}-%{snapshot}.tar.xz
 Source1: 	%{name}-snapshot.sh
+Patch:		desktop.patch
 
 BuildRequires:  alsa-lib-devel
 Buildrequires:  gtk3-devel
@@ -44,6 +45,7 @@ BuildRequires:	libtool
 BuildRequires:	jansson-devel
 BuildRequires:  bison
 BuildRequires:	zlib-devel
+BuildRequires:	desktop-file-utils
 
 %if 0%{?_with_restricted}
 BuildRequires:  faad2-devel
@@ -64,9 +66,9 @@ It is very fast and lightweight, and extensible using plugins
 %if 0%{?_with_restricted}
 
 %package 	restricted-plugins
-License:        GPL+ or Artistic
+License:        LGPLv2
 Summary:        Restricted plugins Support for %{name}
-Group:          Productivity/Multimedia/Sound/Players
+Group:		Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
 Provides:	deadbeef-plugins = %{version}-%{release}
 
@@ -84,7 +86,7 @@ client (such as gxmms2 or esperanza).
 
 %package devel
 License:        GPLv2
-Group:          Development/Libraries/C and C++
+Group:		Development/Libraries
 Summary:        Devel files for %name
 Requires:       pkgconfig
 Requires:       %{name} = %{version}-%{release}
@@ -94,6 +96,7 @@ This package provides headers to develop deadbeef plugins
 
 %prep
 %setup -n deadbeef
+%patch -p0
 
 
 %build
@@ -114,8 +117,11 @@ rm -f %buildroot/%_libdir/deadbeef/*.la
 %find_lang %name
 
 
-%files 
+%check
+desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
+
+%files -f %{name}.lang
 %{_bindir}/deadbeef
 %{_libdir}/deadbeef/
 %if 0%{?_with_restricted}
@@ -127,7 +133,7 @@ rm -f %buildroot/%_libdir/deadbeef/*.la
 %{_docdir}/deadbeef/
 %{_datadir}/icons/hicolor/*/apps/deadbeef.png
 %{_datadir}/icons/hicolor/scalable/apps/deadbeef.svg
-%{_datadir}/locale/*/LC_MESSAGES/deadbeef.mo
+
 
 %if 0%{?_with_restricted}
 %files restricted-plugins
