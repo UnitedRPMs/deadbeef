@@ -1,14 +1,14 @@
-# deadbeef-0.7.1-20160427-499da45.tar.xz
+# deadbeef-0.7.2-20160427-3762995.tar.xz
 %global gitdate 20160427
-%global gitversion 499da45
+%global gitversion 3762995
 %global snapshot %{gitdate}-%{gitversion}
 %global gver .%{gitdate}git%{gitversion}
 
 %global _with_restricted 1
 
 Name:           deadbeef
-Version:        0.7.1
-Release:        2%{?gver}%{dist}
+Version:        0.7.2
+Release:        1%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
@@ -146,8 +146,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %changelog
 
-* Wed Apr 27 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.1-20160427-499da45-2
-- Updated to 0.7.1-20160427-499da45
+* Wed Apr 27 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.2-20160427-3762995-1
+- Updated to 0.7.2-20160427-3762995
 
 * Tue Mar 29 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.1-20160329-1cfcd8b-1
 - Updated to 0.7.1-20160329-1cfcd8b

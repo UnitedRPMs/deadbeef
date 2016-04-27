@@ -1,5 +1,7 @@
 #!/bin/bash
 
+tag_name=0.7.2
+
 set -x
 
 tmp=$(mktemp -d)
@@ -17,9 +19,9 @@ package=deadbeef
 name=deadbeef
 
 pushd ${tmp}
-git clone --depth 1 https://github.com/Alexey-Yakovenko/${package}.git
+git clone -b ${tag_name} --depth 1 https://github.com/Alexey-Yakovenko/${package}.git
 cd ${package}
 tag=$(git rev-list HEAD -n 1 | cut -c 1-7)
-version=$(cat ChangeLog | grep 'version [0-9]' | awk -F 'version' '{print $2}' | sort | tail -1 | sed 's|^ *||g')
+version=`echo ${tag_name} | tr -d 'v'`
 cd ${tmp}
 tar Jcf "$pwd"/${name}-${version}-${date}-${tag}.tar.xz ${package}
