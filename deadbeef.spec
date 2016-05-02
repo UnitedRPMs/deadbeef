@@ -8,7 +8,7 @@
 
 Name:           deadbeef
 Version:        0.7.2
-Release:        1%{?gver}%{dist}
+Release:        2%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
@@ -53,6 +53,7 @@ BuildRequires:  ffmpeg-devel
 BuildRequires:  libmad-devel
 %endif
 
+Requires: desktop-file-utils
 Recommends: %{name}-restricted-plugins = %{version}-%{release}
 
 %description
@@ -120,6 +121,19 @@ rm -f %buildroot/%_libdir/deadbeef/*.la
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
+%post
+/usr/bin/update-desktop-database &> /dev/null || :
+/bin/touch --no-create %{_datadir}/icons/hicolor &> /dev/null || :
+
+%postun
+/usr/bin/update-desktop-database &> /dev/null || :
+if [ $1 -eq 0 ] ; then
+    /bin/touch --no-create %{_datadir}/icons/hicolor &> /dev/null || :
+    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &> /dev/null || :
+fi
+
+%posttrans
+/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &> /dev/null || :
 
 %files -f %{name}.lang
 %{_bindir}/deadbeef
@@ -145,6 +159,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %_includedir/%name
 
 %changelog
+* Mon May 2  2016 Pavlo Rudyi <paulcarroty at riseup.net> - 0.7.2-20160427-3762995-2
+- Added scriptlets 
 
 * Wed Apr 27 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.2-20160427-3762995-1
 - Updated to 0.7.2-20160427-3762995
