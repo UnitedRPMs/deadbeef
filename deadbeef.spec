@@ -113,7 +113,7 @@ export CXXFLAGS="%optflags"
 make
 
 %install
-%makeinstall
+%make_install
 rm -f %buildroot/%_libdir/deadbeef/*.la
 %find_lang %name
 
