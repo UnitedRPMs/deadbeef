@@ -100,8 +100,6 @@ This package provides headers to develop deadbeef plugins
 
 
 %build
-export CFLAGS="%optflags"
-export CXXFLAGS="%optflags"
 
 ./autogen.sh
 %configure --enable-src=yes \
