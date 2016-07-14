@@ -8,7 +8,7 @@
 
 Name:           deadbeef
 Version:        0.7.2
-Release:        3%{?gver}%{dist}
+Release:        4%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
@@ -157,6 +157,9 @@ fi
 %_includedir/%name
 
 %changelog
+
+* Thu Jun 30 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.2-4-20160427git3762995
+- Massive rebuild F25
 
 * Wed May 3  2016 Pavlo Rudyi <paulcarroty at riseup.net> - 0.7.2-20160427-3762995-3
 - dropped redundant flags
