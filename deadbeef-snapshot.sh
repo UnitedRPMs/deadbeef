@@ -19,9 +19,17 @@ package=deadbeef
 name=deadbeef
 
 pushd ${tmp}
-git clone -b ${tag_name} --depth 1 https://github.com/Alexey-Yakovenko/${package}.git
+git clone https://github.com/Alexey-Yakovenko/${package}.git
 cd ${package}
 tag=$(git rev-list HEAD -n 1 | cut -c 1-7)
 version=`echo ${tag_name} | tr -d 'v'`
 cd ${tmp}
 tar Jcf "$pwd"/${name}-${version}-${date}-${tag}.tar.xz ${package}
+
+popd
+upload_source=$( curl --upload-file ${name}-${version}-${date}-${tag}.tar.xz https://transfer.sh/${name}-${version}-${date}-${tag}.tar.xz )
+
+if [ -n "$upload_source" ]; then
+GCOM=$( sed -n '/Source0:/=' ${name}.spec)
+sed -i "${GCOM}s#.*#Source0:	${upload_source}#" ${name}.spec
+fi

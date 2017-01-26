@@ -1,6 +1,6 @@
-# deadbeef-0.7.2-20160427-3762995.tar.xz
-%global gitdate 20160427
-%global gitversion 3762995
+# deadbeef-0.7.2-20170126-4c5af84.tar.xz
+%global gitdate 20170126
+%global gitversion 4c5af84
 %global snapshot %{gitdate}-%{gitversion}
 %global gver .%{gitdate}git%{gitversion}
 
@@ -8,12 +8,12 @@
 
 Name:           deadbeef
 Version:        0.7.2
-Release:        4%{?gver}%{dist}
+Release:        5%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
 Url:            http://deadbeef.sourceforge.net/
-Source0:	%{name}-%{version}-%{snapshot}.tar.xz
+Source0:	https://transfer.sh/WOMSm/deadbeef-0.7.2-20170126-4c5af84.tar.xz
 Source1: 	%{name}-snapshot.sh
 Patch:		desktop.patch
 
@@ -23,7 +23,7 @@ BuildRequires:  libcurl-devel
 BuildRequires:  libsamplerate-devel
 BuildRequires:  libvorbis-devel
 BuildRequires:  flac-devel
-BuildRequires:  libcddb-devel
+BuildRequires:  pkgconfig(libcddb)
 BuildRequires:  libcdio-devel
 BuildRequires:  libsndfile-devel
 BuildRequires:  wavpack-devel
@@ -104,17 +104,21 @@ This package provides headers to develop deadbeef plugins
 
 ./autogen.sh
 %configure --enable-src=yes \
+ --disable-static          \
 %if 0%{?_with_restricted}
  --enable-ffmpeg \
+ --enable-psf    \
 %endif
+ --docdir=%{_docdir}/%{name}/
 
-make
+make %{?_smp_mflags}
 
 %install
 %make_install
-rm -f %buildroot/%_libdir/deadbeef/*.la
+rm -f %buildroot/%{_libdir}/deadbeef/*.la
 %find_lang %name
 
+find . -name '.cpp' -or -name '.hpp' -or -name '*.h' | xargs chmod 644
 
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
@@ -134,23 +138,23 @@ fi
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &> /dev/null || :
 
 %files -f %{name}.lang
-%{_bindir}/deadbeef
-%{_libdir}/deadbeef/
+%doc %{_docdir}/%{name}/
+%{_bindir}/%{name}
+%{_libdir}/%{name}/
 %if 0%{?_with_restricted}
-%exclude %{_libdir}/deadbeef/aac.so*
-%exclude %{_libdir}/deadbeef/ffmpeg.so*
+%exclude %{_libdir}/%{name}/aac.so*
+%exclude %{_libdir}/%{name}/ffmpeg.so*
 %endif
 %{_datadir}/applications/deadbeef.desktop
-%{_datadir}/deadbeef/
-%{_docdir}/deadbeef/
-%{_datadir}/icons/hicolor/*/apps/deadbeef.png
-%{_datadir}/icons/hicolor/scalable/apps/deadbeef.svg
+%{_datadir}/%{name}/
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
+%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 
 
 %if 0%{?_with_restricted}
 %files restricted-plugins
-%_libdir/deadbeef/aac.so*
-%_libdir/deadbeef/ffmpeg.so*
+%{_libdir}/%{name}/aac.so*
+%{_libdir}/%{name}/ffmpeg.so*
 %endif
 
 %files devel
@@ -158,10 +162,13 @@ fi
 
 %changelog
 
+* Thu Jan 26 2017 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.2-5-20170126git4c5af84
+- Updated to 0.7.2-20170126git4c5af84
+
 * Thu Jun 30 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.2-4-20160427git3762995
 - Massive rebuild F25
 
-* Wed May 3  2016 Pavlo Rudyi <paulcarroty at riseup.net> - 0.7.2-20160427-3762995-3
+* Tue May 3  2016 Pavlo Rudyi <paulcarroty at riseup.net> - 0.7.2-20160427-3762995-3
 - dropped redundant flags
 
 * Mon May 2  2016 Pavlo Rudyi <paulcarroty at riseup.net> - 0.7.2-20160427-3762995-2
