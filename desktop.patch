@@ -1,75 +1,71 @@
---- deadbeef.desktop.in	2016-04-27 09:19:10.000000000 -0600
-+++ deadbeef.desktop-1.in	2016-04-27 12:52:26.510991183 -0600
-@@ -18,60 +18,60 @@
- 
- X-Ayatana-Desktop-Shortcuts=Play;Pause;Stop;Next;Prev
- 
+--- a/deadbeef.desktop.in	2017-03-17 06:32:13.000000000 -0600
++++ b/deadbeef_new.desktop.in	2017-03-18 11:08:38.210932026 -0600
+@@ -12,66 +12,7 @@
+ Icon=deadbeef
+ Exec=deadbeef %F
+ Terminal=false
+-Actions=Play;Pause;Stop;Next;Prev
+ MimeType=application/ogg;audio/x-vorbis+ogg;application/x-ogg;audio/mp3;audio/prs.sid;audio/x-flac;audio/mpeg;audio/x-mpeg;audio/x-mod;audio/x-it;audio/x-s3m;audio/x-xm;audio/x-mpegurl;audio/x-scpls;
+ Categories=Audio;AudioVideo;Player;GTK;
 -Keywords=Sound;Music;Audio;Player;Musicplayer;MP3
 -Keywords[zh_TW]=Sound;Music;Audio;Player;Musicplayer;MP3;音樂;音樂播放器;播放器;音訊
+-
+-X-Ayatana-Desktop-Shortcuts=Play;Pause;Stop;Next;Prev
+-X-PulseAudio-Properties=media.role=music
+-
+-[Play Shortcut Group]
+-Name=Play
+-Name[zh_TW]=播放
+-Exec=deadbeef --play
+-TargetEnvironment=Unity
+-
+-[Pause Shortcut Group]
+-Name=Pause
+-Name[zh_TW]=暫停
+-Exec=deadbeef --pause
+-TargetEnvironment=Unity
+-
+-[Stop Shortcut Group]
+-Name=Stop
+-Name[zh_TW]=停止
+-Exec=deadbeef --stop
+-TargetEnvironment=Unity
+-
+-[Next Shortcut Group]
+-Name=Next
+-Name[zh_TW]=下一首
+-Exec=deadbeef --next
+-TargetEnvironment=Unity
+-
+-[Prev Shortcut Group]
+-Name=Prev
+-Name[zh_TW]=上一首
+-Exec=deadbeef --prev
+-TargetEnvironment=Unity
+-
+-[Desktop Action Play]
+-Name=Play
+-Name[zh_TW]=播放
+-Exec=deadbeef --play
+-
+-[Desktop Action Pause]
+-Name=Pause
+-Name[zh_TW]=暫停
+-Exec=deadbeef --pause
+-
+-[Desktop Action Stop]
+-Name=Stop
+-Name[zh_TW]=停止
+-Exec=deadbeef --stop
+-
+-[Desktop Action Next]
+-Name=Next
+-Name[zh_TW]=下一首
+-Exec=deadbeef --next
+-
+-[Desktop Action Prev]
+-Name=Prev
+-Name[zh_TW]=上一首
+-Exec=deadbeef --prev
 +Keywords=Sound;Music;Audio;Player;Musicplayer;MP3;
 +Keywords[zh_TW]=Sound;Music;Audio;Player;Musicplayer;MP3;音樂;音樂播放器;播放器;音訊;
- 
--[Play Shortcut Group]
-+[X-Play Shortcut Group]
- Name=Play
- Name[zh_TW]=播放
- Exec=deadbeef --play
- TargetEnvironment=Unity
- 
--[Pause Shortcut Group]
-+[X-Pause Shortcut Group]
- Name=Pause
- Name[zh_TW]=暫停
- Exec=deadbeef --pause
- TargetEnvironment=Unity
- 
--[Stop Shortcut Group]
-+[X-Stop Shortcut Group]
- Name=Stop
- Name[zh_TW]=停止
- Exec=deadbeef --stop
- TargetEnvironment=Unity
- 
--[Next Shortcut Group]
-+[X-Next Shortcut Group]
- Name=Next
- Name[zh_TW]=下一首
- Exec=deadbeef --next
- TargetEnvironment=Unity
- 
--[Prev Shortcut Group]
-+[X-Prev Shortcut Group]
- Name=Prev
- Name[zh_TW]=上一首
- Exec=deadbeef --prev
- TargetEnvironment=Unity
- 
--[Desktop Action Play]
-+[X-Desktop Action Play]
- Name=Play
- Name[zh_TW]=播放
- Exec=deadbeef --play
- 
--[Desktop Action Pause]
-+[X-Desktop Action Pause]
- Name=Pause
- Name[zh_TW]=暫停
- Exec=deadbeef --pause
- 
--[Desktop Action Stop]
-+[X-Desktop Action Stop]
- Name=Stop
- Name[zh_TW]=停止
- Exec=deadbeef --stop
- 
--[Desktop Action Next]
-+[X-Desktop Action Next]
- Name=Next
- Name[zh_TW]=下一首
- Exec=deadbeef --next
- 
--[Desktop Action Previous]
-+[X-Desktop Action Previous]
- Name=Prev
- Name[zh_TW]=上一首
- Exec=deadbeef --prev

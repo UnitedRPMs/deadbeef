@@ -1,21 +1,23 @@
-# deadbeef-0.7.2-20170126-4c5af84.tar.xz
-%global gitdate 20170126
-%global gitversion 4c5af84
-%global snapshot %{gitdate}-%{gitversion}
-%global gver .%{gitdate}git%{gitversion}
+# deadbeef-0.7.2-6-20170318git87d3fd5.tar.xz
+%global gitdate 20170318
+%global commit0 87d3fd529d76b9d04bca4ababc5ac03988fa8117
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global gver .%{gitdate}git%{shortcommit0}
 
 %global _with_restricted 1
 
 Name:           deadbeef
 Version:        0.7.2
-Release:        5%{?gver}%{dist}
+Release:        6%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
 Url:            http://deadbeef.sourceforge.net/
-Source0:	https://transfer.sh/WOMSm/deadbeef-0.7.2-20170126-4c5af84.tar.xz
+Source0:	https://github.com/Alexey-Yakovenko/deadbeef/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: 	%{name}-snapshot.sh
 Patch:		desktop.patch
+# PATCH-FEATURE-UPSTREAM deadbeef-add-appdata.patch -- Add a translateable AppStream metadata file, https://github.com/Alexey-Yakovenko/deadbeef/pull/1705
+Patch2:         %{name}-add-appdata.patch
 
 BuildRequires:  alsa-lib-devel
 Buildrequires:  gtk3-devel
@@ -96,9 +98,7 @@ Requires:       %{name} = %{version}-%{release}
 This package provides headers to develop deadbeef plugins
 
 %prep
-%setup -n deadbeef
-%patch -p0
-
+%autosetup -n %{name}-%{commit0} -p1
 
 %build
 
@@ -149,7 +149,7 @@ fi
 %{_datadir}/%{name}/
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
-
+%{_datadir}/appdata/%{name}.appdata.xml
 
 %if 0%{?_with_restricted}
 %files restricted-plugins
@@ -162,23 +162,26 @@ fi
 
 %changelog
 
+* Sat Mar 18 2017 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.2-6-20170318git87d3fd5
+- Updated to 0.7.2-6-20170318git87d3fd5
+
 * Thu Jan 26 2017 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.2-5-20170126git4c5af84
 - Updated to 0.7.2-20170126git4c5af84
 
 * Thu Jun 30 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.2-4-20160427git3762995
 - Massive rebuild F25
 
-* Tue May 3  2016 Pavlo Rudyi <paulcarroty at riseup.net> - 0.7.2-20160427-3762995-3
+* Tue May 3  2016 Pavlo Rudyi <paulcarroty at riseup.net> - 0.7.2-3-20160427-3762995
 - dropped redundant flags
 
-* Mon May 2  2016 Pavlo Rudyi <paulcarroty at riseup.net> - 0.7.2-20160427-3762995-2
+* Mon May 2  2016 Pavlo Rudyi <paulcarroty at riseup.net> - 0.7.2-2-20160427-3762995
 - Added scriptlets 
 
-* Wed Apr 27 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.2-20160427-3762995-1
+* Wed Apr 27 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.2-1-20160427-3762995
 - Updated to 0.7.2-20160427-3762995
 
-* Tue Mar 29 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.1-20160329-1cfcd8b-1
+* Tue Mar 29 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.7.1-1-20160329-1cfcd8b
 - Updated to 0.7.1-20160329-1cfcd8b
 
-* Mon Aug 10 2015 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.3.1-20150810-acb0ee4-1
+* Mon Aug 10 2015 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.3.1-1-20150810-acb0ee4
 - Initial build
