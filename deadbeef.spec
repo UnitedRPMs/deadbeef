@@ -111,7 +111,7 @@ This package provides headers to develop deadbeef plugins
 %endif
  --docdir=%{_docdir}/%{name}/
 
-make %{?_smp_mflags}
+make %{?_smp_mflags} V=0
 
 %install
 %make_install
