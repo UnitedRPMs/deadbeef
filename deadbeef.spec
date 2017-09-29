@@ -8,7 +8,7 @@
 
 Name:           deadbeef
 Version:        0.7.2
-Release:        7%{?gver}%{dist}
+Release:        8%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
@@ -161,6 +161,9 @@ fi
 %_includedir/%name
 
 %changelog
+
+* Thu Sep 28 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 0.7.2-8.20170318git87d3fd5  
+- Automatic Mass Rebuild
 
 * Mon Jul 31 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 0.7.2-7.20170318git87d3fd5  
 - Automatic Mass Rebuild
