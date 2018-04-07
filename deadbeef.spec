@@ -15,7 +15,7 @@ License:        GPLv2
 Url:            http://deadbeef.sourceforge.net/
 Source0:	https://github.com/Alexey-Yakovenko/deadbeef/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: 	%{name}-snapshot.sh
-Patch:		desktop.patch
+#Patch:		desktop.patch
 # PATCH-FEATURE-UPSTREAM deadbeef-add-appdata.patch -- Add a translateable AppStream metadata file, https://github.com/Alexey-Yakovenko/deadbeef/pull/1705
 Patch2:         %{name}-add-appdata.patch
 
