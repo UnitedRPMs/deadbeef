@@ -8,7 +8,7 @@
 
 Name:           deadbeef
 Version:        0.7.2
-Release:        10%{?gver}%{dist}
+Release:        11%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
@@ -51,7 +51,7 @@ BuildRequires:	desktop-file-utils
 
 %if 0%{?_with_restricted}
 BuildRequires:  faad2-devel
-BuildRequires:  ffmpeg-devel >= 4.0
+BuildRequires:  ffmpeg-devel >= 4.1
 BuildRequires:  libmad-devel
 %endif
 
@@ -161,6 +161,9 @@ fi
 %_includedir/%name
 
 %changelog
+
+* Thu Dec 06 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 0.7.2-11.gite0f03a6  
+- Rebuilt for ffmpeg
 
 * Thu Apr 26 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 0.7.2-10.gite0f03a6  
 - Automatic Mass Rebuild
