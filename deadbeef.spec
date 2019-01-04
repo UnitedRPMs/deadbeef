@@ -1,6 +1,6 @@
 # deadbeef-0.7.2-6-20170318git87d3fd5.tar.xz
-%global gitdate 20180407
-%global commit0 e0f03a6c776938722c2f316f12cd891d44e778ad
+%global gitdate 20190104
+%global commit0 06de3d0a2a22c7fa069fff13fcec393ae216ff5b
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -8,7 +8,7 @@
 
 Name:           deadbeef
 Version:        0.7.2
-Release:        11%{?gver}%{dist}
+Release:        12%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
@@ -161,6 +161,9 @@ fi
 %_includedir/%name
 
 %changelog
+
+* Fri Jan 04 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 0.7.2-12.git06de3d0 
+- Updated to current commit
 
 * Thu Dec 06 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 0.7.2-11.gite0f03a6  
 - Rebuilt for ffmpeg
