@@ -1,19 +1,7 @@
---- a/Makefile.am
-+++ b/Makefile.am
-@@ -67,6 +67,9 @@ docs_DATA = README help.txt about.txt translators.txt ChangeLog\
- desktopdir = $(datadir)/applications
- desktop_DATA = deadbeef.desktop
- 
--EXTRA_DIST = $(docs_DATA) $(desktop_DATA) $(INTLTOOL_FILES) translation/extra.c sj_to_unicode.h examples/decoder_template.c examples/dsp_template.c yasmwrapper.sh
-+appdatadir = $(datadir)/appdata
-+appdata_DATA = deadbeef.appdata.xml
-+
-+EXTRA_DIST = $(docs_DATA) $(desktop_DATA) $(appdata_DATA) $(INTLTOOL_FILES) translation/extra.c sj_to_unicode.h examples/decoder_template.c examples/dsp_template.c yasmwrapper.sh
- 
- ACLOCAL_AMFLAGS = -I m4
---- a/configure.ac
-+++ b/configure.ac
-@@ -955,6 +955,7 @@ plugins/statusnotifier/Makefile
+diff -ruN orig/configure.ac new/configure.ac
+--- orig/configure.ac	2018-12-28 12:51:06.000000000 -0600
++++ new/configure.ac	2019-01-04 22:09:00.325446491 -0600
+@@ -971,6 +971,7 @@
  intl/Makefile
  po/Makefile.in
  deadbeef.desktop
@@ -21,8 +9,9 @@
  ])
  
  AC_OUTPUT
---- /dev/null
-+++ b/deadbeef.appdata.xml.in
+diff -ruN orig/deadbeef.appdata.xml.in new/deadbeef.appdata.xml.in
+--- orig/deadbeef.appdata.xml.in	1969-12-31 18:00:00.000000000 -0600
++++ new/deadbeef.appdata.xml.in	2019-01-04 22:13:03.557898019 -0600
 @@ -0,0 +1,42 @@
 +<?xml version="1.0" encoding="UTF-8"?>
 +<application>
@@ -66,9 +55,24 @@
 +  <url type="homepage">http://deadbeef.sourceforge.net/</url>
 +  <translation type="gettext">deadbeef</translation>
 +</application>
---- a/po/POTFILES.in
-+++ b/po/POTFILES.in
-@@ -15,6 +15,7 @@ main.c
+diff -ruN orig/Makefile.am new/Makefile.am
+--- orig/Makefile.am	2018-12-28 12:51:06.000000000 -0600
++++ new/Makefile.am	2019-01-04 22:08:14.433983953 -0600
+@@ -69,6 +69,9 @@
+ desktopdir = $(datadir)/applications
+ desktop_DATA = deadbeef.desktop
+ 
+-EXTRA_DIST = $(docs_DATA) $(desktop_DATA) $(INTLTOOL_FILES) translation/extra.c translation/plugins.c sj_to_unicode.h examples/decoder_template.c examples/dsp_template.c yasmwrapper.sh
++appdatadir = $(datadir)/appdata
++appdata_DATA = deadbeef.appdata.xml
++
++EXTRA_DIST = $(docs_DATA) $(desktop_DATA) $(appdata_DATA) $(INTLTOOL_FILES) translation/extra.c sj_to_unicode.h examples/decoder_template.c examples/dsp_template.c yasmwrapper.sh
+ 
+ ACLOCAL_AMFLAGS = -I m4
+diff -ruN orig/po/POTFILES.in new/po/POTFILES.in
+--- orig/po/POTFILES.in	2018-12-28 12:51:06.000000000 -0600
++++ new/po/POTFILES.in	2019-01-04 22:11:27.436929219 -0600
+@@ -15,6 +15,7 @@
  playlist.c
  plugins.c
  deadbeef.desktop.in
