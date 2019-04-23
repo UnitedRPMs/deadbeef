@@ -1,5 +1,5 @@
-%global gitdate 20190227
-%global commit0 373f55642b6b752bdca159ed621fcd732ce9063c
+%global gitdate 20190423
+%global commit0 479a6412745b6474757c9e9ad44fd43236414b6f
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -7,14 +7,14 @@
 
 Name:           deadbeef
 Version:        1.8.0
-Release:        1%{?gver}%{dist}
+Release:        2%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
 Url:            http://deadbeef.sourceforge.net/
 Source0:	https://github.com/Alexey-Yakovenko/deadbeef/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: 	%{name}-snapshot.sh
-Patch:		desktop.patch
+#Patch:		desktop.patch
 # PATCH-FEATURE-UPSTREAM deadbeef-add-appdata.patch -- Add a translateable AppStream metadata file, https://github.com/Alexey-Yakovenko/deadbeef/pull/1705
 Patch2:         %{name}-add-appdata.patch
 
@@ -160,6 +160,9 @@ fi
 %_includedir/%name
 
 %changelog
+
+* Tue Apr 23 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.0-2.git479a641
+- Updated to current commit
 
 * Wed Feb 27 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.0-1.git373f556
 - Updated to 1.8.0
