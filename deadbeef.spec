@@ -1,12 +1,12 @@
-%global gitdate 20190423
-%global commit0 479a6412745b6474757c9e9ad44fd43236414b6f
+%global gitdate 20190625
+%global commit0 fd16773638401ce5cf254532b252c30dcb5933ab
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 %global _with_restricted 1
 
 Name:           deadbeef
-Version:        1.8.0
+Version:        1.8.1
 Release:        2%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
@@ -160,6 +160,9 @@ fi
 %_includedir/%name
 
 %changelog
+
+* Tue Jun 25 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.1-2.gitfd16773
+- Updated to current commit
 
 * Tue Apr 23 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.0-2.git479a641
 - Updated to current commit
