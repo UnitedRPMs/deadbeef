@@ -1,16 +1,16 @@
---- a/deadbeef.desktop.in	2018-04-05 05:26:03.000000000 -0600
-+++ b/deadbeef.desktop-1.in	2018-04-07 18:24:35.416171249 -0600
-@@ -14,73 +14,9 @@
+diff -ruN orig/deadbeef.desktop.in new/deadbeef.desktop.in
+--- orig/deadbeef.desktop.in	2019-08-01 12:36:50.000000000 -0600
++++ new/deadbeef.desktop.in	2019-08-07 22:37:51.620195961 -0600
+@@ -14,73 +14,8 @@
  Icon=deadbeef
  Exec=deadbeef %F
  Terminal=false
 -Actions=Play;Pause;Stop;Next;Prev
-+
  MimeType=application/ogg;audio/x-vorbis+ogg;application/x-ogg;audio/mp3;audio/prs.sid;audio/x-flac;audio/mpeg;audio/x-mpeg;audio/x-mod;audio/x-it;audio/x-s3m;audio/x-xm;audio/x-mpegurl;audio/x-scpls;
  Categories=Audio;AudioVideo;Player;GTK;
--Keywords=Sound;Music;Audio;Player;Musicplayer;MP3
--Keywords[zh_TW]=Sound;Music;Audio;Player;Musicplayer;MP3;音樂;音樂播放器;播放器;音訊
--
+ Keywords=Sound;Music;Audio;Player;Musicplayer;MP3
+ Keywords[zh_TW]=Sound;Music;Audio;Player;Musicplayer;MP3;音樂;音樂播放器;播放器;音訊
+ 
 -X-Ayatana-Desktop-Shortcuts=Play;Pause;Stop;Next;Prev
 -X-PulseAudio-Properties=media.role=music
 -
@@ -70,9 +70,7 @@
 -Name=Next
 -Name[zh_TW]=下一首
 -Exec=deadbeef --next
-+Keywords=Sound;Music;Audio;Player;Musicplayer;MP3;
-+Keywords[zh_TW]=Sound;Music;Audio;Player;Musicplayer;MP3;音樂;音樂播放器;播放器;音訊;
- 
+-
 -[Desktop Action Prev]
 -Name=Prev
 -Name[zh_TW]=上一首
