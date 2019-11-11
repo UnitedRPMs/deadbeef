@@ -7,7 +7,7 @@
 
 Name:           deadbeef
 Version:        1.8.2
-Release:        2%{?gver}%{dist}
+Release:        7%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
@@ -49,7 +49,7 @@ BuildRequires:	zlib-devel
 BuildRequires:	desktop-file-utils
 
 %if 0%{?_with_restricted}
-BuildRequires:  faad2-devel
+BuildRequires:  faad2-devel >= 2.9.1
 BuildRequires:  ffmpeg-devel >= 4.1
 BuildRequires:  libmad-devel
 %endif
@@ -160,6 +160,9 @@ fi
 %_includedir/%name
 
 %changelog
+
+* Sat Nov 09 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.2-7.git7aafde0
+- Rebuilt for faad2
 
 * Wed Aug 07 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.2-2.git7aafde0
 - Updated to 1.8.2
