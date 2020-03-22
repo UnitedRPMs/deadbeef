@@ -11,12 +11,10 @@ Release:        7%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
-Url:            http://deadbeef.sourceforge.net/
+Url:            https://deadbeef.sourceforge.net/
 Source0:	https://github.com/Alexey-Yakovenko/deadbeef/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: 	%{name}-snapshot.sh
-Patch:		desktop.patch
-# PATCH-FEATURE-UPSTREAM deadbeef-add-appdata.patch -- Add a translateable AppStream metadata file, https://github.com/Alexey-Yakovenko/deadbeef/pull/1705
-Patch2:         %{name}-add-appdata.patch
+Source2:	net.sourceforge.deadbeef.deadbeef.metainfo.xml
 
 BuildRequires:  alsa-lib-devel
 Buildrequires:  gtk3-devel
@@ -119,6 +117,8 @@ rm -f %buildroot/%{_libdir}/deadbeef/*.la
 
 find . -name '.cpp' -or -name '.hpp' -or -name '*.h' | xargs chmod 644
 
+install -Dm 644 %{S:2} %{buildroot}%{_datadir}/metainfo/net.sourceforge.deadbeef.deadbeef.metainfo.xml
+
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
@@ -137,6 +137,7 @@ fi
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &> /dev/null || :
 
 %files -f %{name}.lang
+%license COPYING.GPLv2 COPYING.LGPLv2.1
 %doc %{_docdir}/%{name}/
 %{_bindir}/%{name}
 %{_libdir}/%{name}/
@@ -148,7 +149,7 @@ fi
 %{_datadir}/%{name}/
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
-%{_datadir}/appdata/%{name}.appdata.xml
+%{_datadir}/metainfo/net.sourceforge.deadbeef.deadbeef.metainfo.xml
 
 %if 0%{?_with_restricted}
 %files restricted-plugins

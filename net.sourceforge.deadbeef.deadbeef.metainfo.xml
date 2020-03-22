@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>net.sourceforge.deadbeef.deadbeef</id>
+  
+  <name>deadbeef</name>
+  <summary>GTK2 audio player</summary>
+  
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  
+  <description>
+    <p>
+      DeaDBeeF is an audio player for GNU/Linux and other UNIX-like systems. It is written in C with some plugins in C++. It has minimal dependencies, a native GTK2 GUI, cuesheet support, support for MP3, Ogg, FLAC, and APE, chiptune formats with subtunes, song-length databases, and more.
+    </p>
+    <p>
+      It is very fast and lightweight, and extensible using plugins (DSP, GUI, output, input, etc.). The GUI looks similar to Foobar2000.
+    </p>
+  </description>
+  
+  <launchable type="desktop-id">deadbeef.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>http://deadbeef.sourceforge.net/screenshots/0.6/01.png</image>
+    </screenshot>
+  </screenshots>
+</component>
