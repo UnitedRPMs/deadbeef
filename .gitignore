@@ -6,3 +6,4 @@ SRPMS/*
 deadbeef*.tar.gz
 deadbeef*.tar.xz
 .directory
+*.rpm
