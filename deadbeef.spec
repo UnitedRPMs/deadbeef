@@ -7,7 +7,7 @@
 
 Name:           deadbeef
 Version:        1.8.3
-Release:        7%{?gver}%{dist}
+Release:        8%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
@@ -161,6 +161,9 @@ fi
 %_includedir/%name
 
 %changelog
+
+* Fri Apr 10 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.3-8.git3e7c048
+- Rebuilt for libcdio
 
 * Sat Mar 21 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.3-7.git3e7c048
 - Updated to 1.8.3
