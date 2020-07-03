@@ -7,7 +7,7 @@
 
 Name:           deadbeef
 Version:        1.8.3
-Release:        8%{?gver}%{dist}
+Release:        9%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
@@ -48,7 +48,7 @@ BuildRequires:	desktop-file-utils
 
 %if 0%{?_with_restricted}
 BuildRequires:  faad2-devel >= 2.9.1
-BuildRequires:  ffmpeg-devel >= 4.1
+BuildRequires:  ffmpeg-devel >= 4.3
 BuildRequires:  libmad-devel
 %endif
 
@@ -161,6 +161,9 @@ fi
 %_includedir/%name
 
 %changelog
+
+* Tue Jun 23 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.3-9.git3e7c048
+- Rebuilt for ffmpeg
 
 * Fri Apr 10 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.3-8.git3e7c048
 - Rebuilt for libcdio
