@@ -1,20 +1,24 @@
 %global gitdate 20200703
-%global commit0 69fa2dba25e52615ea208abd3db0eec74b7d3244
+%global commit0 bef1b4a0436fd68cc22aaa7d82a634bc36122021
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 %global _with_restricted 1
 
+
 Name:           deadbeef
-Version:        1.8.4
+Version:        1.8.5
 Release:        7%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
 Url:            https://deadbeef.sourceforge.net/
-Source0:	https://github.com/Alexey-Yakovenko/deadbeef/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0:	https://github.com/DeaDBeeF-Player/deadbeef/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: 	%{name}-snapshot.sh
 Source2:	net.sourceforge.deadbeef.deadbeef.metainfo.xml
+
+# external
+Source3:	https://github.com/DeaDBeeF-Player/mp4p/archive/de193f595901620046ea23900162612ff3acf0e5.zip
 
 BuildRequires:  alsa-lib-devel
 Buildrequires:  gtk3-devel
@@ -44,7 +48,9 @@ BuildRequires:	libtool
 BuildRequires:	jansson-devel
 BuildRequires:  bison
 BuildRequires:	zlib-devel
-BuildRequires:	desktop-file-utils
+BuildRequires:	desktop-file-utils 
+BuildRequires:	clang 
+BuildRequires:	pulseaudio-libs-devel
 
 %if 0%{?_with_restricted}
 BuildRequires:  faad2-devel >= 2.9.1
@@ -95,20 +101,29 @@ Requires:       %{name} = %{version}-%{release}
 This package provides headers to develop deadbeef plugins
 
 %prep
-%autosetup -n %{name}-%{commit0} -p1
+%autosetup -n %{name}-%{commit0} -p1 -a3
+rm -rf $PWD/external/mp4p
+mv -f mp4p-de193f595901620046ea23900162612ff3acf0e5 $PWD/external/mp4p
 
 %build
 
-./autogen.sh
+
+NOCONFIGURE=1 ./autogen.sh
+export CFLAGS="%{optflags} -fno-strict-aliasing"
+export CXXFLAGS="$CFLAGS"
+
 %configure --enable-src=yes \
  --disable-static          \
 %if 0%{?_with_restricted}
  --enable-ffmpeg \
  --enable-psf    \
 %endif
+ --disable-lfm \
+ --disable-notify \
  --docdir=%{_docdir}/%{name}/
+ 
 
-make %{?_smp_mflags} V=0
+%make_build
 
 %install
 %make_install
@@ -161,6 +176,9 @@ fi
 %_includedir/%name
 
 %changelog
+
+* Mon Jan 11 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.5-7.gitbef1b4a
+- Updated to 1.8.5
 
 * Fri Jul 03 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.4-7.git69fa2db
 - Updated to 1.8.4
