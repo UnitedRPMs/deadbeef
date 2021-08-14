@@ -1,5 +1,5 @@
 %global gitdate 20200703
-%global commit0 4e5e467f192aa6d5ce4bd109bbbb0b1bacfea2ed
+%global commit0 b8832d713253dfe899dbeea9df6c152f88d280d6
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -7,7 +7,7 @@
 
 
 Name:           deadbeef
-Version:        1.8.7
+Version:        1.8.8
 Release:        7%{?gver}%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
@@ -176,6 +176,9 @@ fi
 %_includedir/%name
 
 %changelog
+
+* Thu Aug 12 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.8-7.gitb8832d7
+- Updated to 1.8.8
 
 * Mon Feb 15 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.7-7.git4e5e467
 - Updated to 1.8.7
