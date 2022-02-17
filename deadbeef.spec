@@ -1,60 +1,76 @@
 %global gitdate 20200703
-%global commit0 b8832d713253dfe899dbeea9df6c152f88d280d6
+%global commit0 d75fcb8545227ea625709d7a723687aaa521221b
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 %global _with_restricted 1
 
+%global _lto_cflags %{nil}
+
 
 Name:           deadbeef
 Version:        1.8.8
-Release:        7%{?gver}%{dist}
+Release:        8%{dist}
 Summary:        GTK2 audio player
 Group:		Applications/Multimedia
 License:        GPLv2
 Url:            https://deadbeef.sourceforge.net/
-Source0:	https://github.com/DeaDBeeF-Player/deadbeef/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+#Source0:	https://github.com/DeaDBeeF-Player/deadbeef/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source:		https://github.com/DeaDBeeF-Player/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1: 	%{name}-snapshot.sh
 Source2:	net.sourceforge.deadbeef.deadbeef.metainfo.xml
 
 # external
-Source3:	https://github.com/DeaDBeeF-Player/mp4p/archive/de193f595901620046ea23900162612ff3acf0e5.zip
+Source3:	https://github.com/DeaDBeeF-Player/mp4p/archive/a80941da6e395953b79a1c50cb855f05cc27a5c2.zip
 
-BuildRequires:  alsa-lib-devel
-Buildrequires:  gtk3-devel
-BuildRequires:  libcurl-devel
-BuildRequires:  libsamplerate-devel
-BuildRequires:  libvorbis-devel
-BuildRequires:  flac-devel
-BuildRequires:  pkgconfig(libcddb)
-BuildRequires:  libcdio-devel
-BuildRequires:  libsndfile-devel
-BuildRequires:  wavpack-devel
+Source4:	https://github.com/DeaDBeeF-Player/apbuild/archive/fc5546517e74ed69ce887dd12050160470c62352.zip
+
 BuildRequires:  dbus-devel
 BuildRequires:  gcc-c++
-BuildRequires:  libnotify-devel
 BuildRequires:  pulseaudio
 BuildRequires:  pkgconfig
-BuildRequires:  imlib2-devel
 BuildRequires:  intltool
 BuildRequires:  turbojpeg-devel
-BuildRequires:  libzip-devel
 BuildRequires:  yasm-devel
-BuildRequires:	libX11-devel
 BuildRequires:	git
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-BuildRequires:	jansson-devel
 BuildRequires:  bison
-BuildRequires:	zlib-devel
 BuildRequires:	desktop-file-utils 
 BuildRequires:	clang 
 BuildRequires:	pulseaudio-libs-devel
+BuildRequires:	clang
+BuildRequires:	unzip
+BuildRequires:	libdispatch-devel
+
+BuildRequires:  pkgconfig(alsa)
+BuildRequires:  pkgconfig(atk)
+BuildRequires:  pkgconfig(cairo)
+BuildRequires:  pkgconfig(dbus-1)
+BuildRequires:  pkgconfig(flac)
+#BuildRequires:  pkgconfig(gtk+-2.0)
+BuildRequires:  pkgconfig(gtk+-3.0)
+BuildRequires:  pkgconfig(imlib2)
+BuildRequires:  pkgconfig(jansson)
+BuildRequires:  pkgconfig(libcddb)
+BuildRequires:  pkgconfig(libcdio)
+BuildRequires:  pkgconfig(libcurl)
+BuildRequires:  pkgconfig(libmpg123)
+BuildRequires:  pkgconfig(libnotify)
+BuildRequires:  pkgconfig(libpulse)
+BuildRequires:  pkgconfig(libzip)
+BuildRequires:  pkgconfig(opusfile)
+BuildRequires:  pkgconfig(pango)
+BuildRequires:  pkgconfig(sndfile)
+BuildRequires:  pkgconfig(vorbis)
+BuildRequires:  pkgconfig(wavpack)
+BuildRequires:  pkgconfig(x11)
+BuildRequires:  pkgconfig(zlib)
 
 %if 0%{?_with_restricted}
 BuildRequires:  faad2-devel >= 2.9.1
-BuildRequires:  ffmpeg-devel >= 4.3
+BuildRequires:  ffmpeg4-devel
 BuildRequires:  libmad-devel
 %endif
 
@@ -101,27 +117,39 @@ Requires:       %{name} = %{version}-%{release}
 This package provides headers to develop deadbeef plugins
 
 %prep
-%autosetup -n %{name}-%{commit0} -p1 -a3
+%autosetup -n %{name}-%{version} -p1 -a3 
 rm -rf $PWD/external/mp4p
-mv -f mp4p-de193f595901620046ea23900162612ff3acf0e5 $PWD/external/mp4p
+mv -f mp4p-a80941da6e395953b79a1c50cb855f05cc27a5c2 $PWD/external/mp4p
+
+rm -rf $PWD/external/apbuild
+unzip %{S:4} && mv -f apbuild-fc5546517e74ed69ce887dd12050160470c62352 $PWD/external/apbuild
 
 %build
 
 
-NOCONFIGURE=1 ./autogen.sh
-export CFLAGS="%{optflags} -fno-strict-aliasing"
+export CC=clang
+export CXX=clang++
+export CFLAGS="%{optflags} -fno-strict-aliasing -fpie -fPIC"
 export CXXFLAGS="$CFLAGS"
+export LDFLAGS="$LDFLAGS -pie"
 
-%configure --enable-src=yes \
- --disable-static          \
+./autogen.sh
+
+%configure \
+	--enable-src=yes \
+	%ifarch %{ix86}
+	--disable-soundtouch \
+	%endif
+	--disable-static \
+	--disable-rpath \
+	--disable-gtk2 \
 %if 0%{?_with_restricted}
- --enable-ffmpeg \
- --enable-psf    \
+	--enable-ffmpeg \
+	--enable-psf    \
 %endif
- --disable-lfm \
- --disable-notify \
- --docdir=%{_docdir}/%{name}/
- 
+	--enable-gtk3 \
+	--docdir=%{_docdir}/%{name}/ \
+	--disable-notify 
 
 %make_build
 
@@ -176,6 +204,9 @@ fi
 %_includedir/%name
 
 %changelog
+
+* Wed Feb 09 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.8-8
+- Rebuilt for ffmpeg
 
 * Thu Aug 12 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.8.8-7.gitb8832d7
 - Updated to 1.8.8
